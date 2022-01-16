@@ -4,6 +4,7 @@
     Author     : tharik
 --%>
 
+<%@page import="org.icbt.my.web.User"%>
 <%@page import="java.util.List"%>
 <%@page import="org.icbt.my.web.Util"%>
 <%@page import="org.icbt.my.web.Person"%>
@@ -20,10 +21,12 @@
         <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
     </head>
     <body>
-        <%            
-            for(Person p : Util.getPersons()) {
-                out.print("<p1>" + p.getFullName() + "</p1><br/>");
-            }  
+        <%   
+            User user = Util.authenticate(request, response, session);
+            if (user != null ) {
+               out.print("<h1> Welcome " + user.getFirstName() + " "+  user.getLastName()+ "</h1>");
+               out.print("<h2>You nic is " + user.getNic() + "</h2>"); 
+            }
         %>
         <br/>
         <table border="1">
