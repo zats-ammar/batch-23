@@ -5,6 +5,7 @@
  */
 package icbt;
 
+import java.util.List;
 import javax.jws.WebService;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
@@ -14,23 +15,16 @@ import javax.jws.WebParam;
  * @author tharik
  */
 @WebService(serviceName = "ICBTService")
-public class ICBTService {
-
-    /**
-     * This is a sample web service operation
-     */
-    @WebMethod(operationName = "hello")
-    public String hello(@WebParam(name = "name") String txt) {
-        return "@@---Welcome " + txt + " !!!!!---@@";
+public class ICBTService {    
+    @WebMethod(operationName = "getPerson")
+    public Person getPerson(@WebParam(name = "id") int id) {
+        DBUtil util = new DBUtil();
+        return util.getPerson(id);
     }
     
-    @WebMethod(operationName = "getPerson")
-    public Person getPerson() {
-        Person p = new Person();
-        p.setFirstName("John");
-        p.setLastName("Smith");
-        p.setNic("456V");
-        
-        return p;
+    @WebMethod(operationName = "getPersons")
+    public List<Person> getPersons() {
+        DBUtil util = new DBUtil();
+        return util.getPersons();
     }
 }
